@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>life cycle</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!--教程(图示):-->
+		<!-- 
+		https://cn.vuejs.org/v2/guide/instance.html#%E5%AE%9E%E4%BE%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90
+		-->
+		<!--api: https://cn.vuejs.org/v2/api/#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7-->
+	</head>
+	<body>
+		<div id="app">
+		  {{ message }}
+		</div>
+		<script>
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+			    message: 'Hello rock!'
+			  },
+				beforeCreate: function(argu) {
+					console.log(argu);
+				},
+				created: function () {
+					// `this` 指向 vm 实例
+					console.log('a is: ' + this.message);
+				},
+				beforeMount: function(argus) {
+					console.log(argus);
+				},
+				mounted: function(argus) {
+					// mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.$nextTick 替换掉 mounted：
+					this.$nextTick(function () {
+						console.log(argus);
+						// Code that will run only after the
+						// entire view has been rendered
+					})
+				},
+				beforeUpdate: function(argus) {
+					// 发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器
+					console.log(argus);
+				},
+				updated:function(argus){
+					this.$nextTick(function () {
+						console.log(argus);
+						// Code that will run only after the
+						// entire view has been re-rendered
+					})
+				},
+				activated:function(argus){
+					console.log(argus);
+				},
+				deactivated:function(argus){
+					console.log(argus);
+				},
+				beforeDestroy:function(argus){
+					console.log(argus);
+				},
+				destroyed:function(argus){
+					console.log(argus);
+				},
+				// (err: Error, vm: Component, info: string) => ?boolean
+				errorCaptured(err, vm, info){
+					console.log(argus);
+				}
+			});
+		</script>
+	</body>
+</html>
