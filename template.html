@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>template</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!--教程(图示):-->
+		<!-- https://cn.vuejs.org/v2/guide/syntax.html -->
+	</head>
+	<body>
+		<div id="app">
+			<span v-once>这个将不会改变: {{ msg }}</span>
+
+			<p>Using mustaches: {{ rawHtml }}</p>
+			<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+			<a v-bind:[href]="url"> 这里是链接 </a>
+			<a :[href]="url"> 这里是链接 </a>
+
+			<div v-on:click.prevent="handle">点击触发事件</div>
+			<div @click.prevent="handle">点击触发事件</div>
+
+		</div>
+		<script>
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+			    msg: 'Hello rock!',
+					rawHtml: '<span style="color: red">This should be red.</span>',
+					attributeName: 'href',
+					href: 'href',
+					url: 'http://www.baidu.com/'
+			  },
+				methods: {
+					handle: function() {
+						console.log('fuck');
+					}
+				},
+				beforeCreate: function(argu) {
+					console.log(argu);
+				},
+				created: function () {
+					// `this` 指向 vm 实例
+					console.log('a is: ' + this.message);
+				}
+			});
+		</script>
+	</body>
+</html>
